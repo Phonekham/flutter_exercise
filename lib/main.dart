@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_exercise/features/guessing_number/screen/guessing_number.dart';
+import 'package:flutter_exercise/features/guessing_number/widgets/toic_tac_toe.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const GuessingNumber(),
+      home: const TicTacToe(),
     );
   }
 }

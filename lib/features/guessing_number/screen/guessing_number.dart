@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math' show Random;
-import 'dart:io';
+
+import 'package:flutter_exercise/features/guessing_number/model/answer.dart';
+import 'package:flutter_exercise/features/guessing_number/widgets/answer_list.dart';
 
 class GuessingNumber extends StatefulWidget {
   const GuessingNumber({Key? key}) : super(key: key);
@@ -10,6 +12,7 @@ class GuessingNumber extends StatefulWidget {
 }
 
 class _GuessingNumberState extends State<GuessingNumber> {
+  final List<Answer> _answers = [];
   int count = 0;
   int cows = 0;
   int bulls = 0;
@@ -35,14 +38,6 @@ class _GuessingNumberState extends State<GuessingNumber> {
     return rnd;
   }
 
-  bool? _verifyEntryNumber(number) {
-    number = number.toString();
-    bool verify = true;
-    for (var i = 0; i < 4; i++) {
-      if (number.lastIndexOf) {}
-    }
-  }
-
   void _check() {
     if (_numberController.text.length < 4) {
       return;
@@ -56,11 +51,13 @@ class _GuessingNumberState extends State<GuessingNumber> {
     final input2 = _numberController.text[1];
     final input3 = _numberController.text[2];
     final input4 = _numberController.text[3];
+    final input = _numberController.text;
+
     if (rnd1 == input1) {
       setState(() {
         cows++;
       });
-    } else if (input1 == rnd2 || input1 == rnd3 || input1 == input4) {
+    } else if (input1 == rnd2 || input1 == rnd3 || input1 == rnd4) {
       setState(() {
         bulls++;
       });
@@ -70,7 +67,7 @@ class _GuessingNumberState extends State<GuessingNumber> {
       setState(() {
         cows++;
       });
-    } else if (input2 == rnd1 || input2 == rnd3 || input2 == input4) {
+    } else if (input2 == rnd1 || input2 == rnd3 || input2 == rnd4) {
       setState(() {
         bulls++;
       });
@@ -80,7 +77,7 @@ class _GuessingNumberState extends State<GuessingNumber> {
       setState(() {
         cows++;
       });
-    } else if (input3 == rnd1 || input3 == rnd2 || input3 == input4) {
+    } else if (input3 == rnd1 || input3 == rnd2 || input3 == rnd4) {
       setState(() {
         bulls++;
       });
@@ -90,16 +87,27 @@ class _GuessingNumberState extends State<GuessingNumber> {
       setState(() {
         cows++;
       });
-    } else if (input4 == rnd1 || input4 == rnd2 || input4 == input3) {
+    } else if (input4 == rnd1 || input4 == rnd2 || input4 == rnd3) {
       setState(() {
         bulls++;
       });
     }
+    _addAnswer(input, rnd);
+    setState(() {
+      count++;
+    });
+    if (rnd == input) {
+      setState(() {
+        game_over = true;
+      });
+    }
+  }
 
-    print(rnd);
-    print(_numberController.text);
-    print(cows);
-    print(bulls);
+  void _addAnswer(String inputNum, String ranNum) {
+    final newAnswer = Answer(inputNumber: inputNum, randomNumber: ranNum);
+    setState(() {
+      _answers.add(newAnswer);
+    });
   }
 
   @override
@@ -112,15 +120,7 @@ class _GuessingNumberState extends State<GuessingNumber> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Center(
-                  child: Text(
-                'Guese number',
-                style: TextStyle(fontSize: 25),
-              )),
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 30.0, left: 30),
+              padding: const EdgeInsets.only(right: 30.0, left: 30),
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 maxLength: 4,
@@ -134,7 +134,18 @@ class _GuessingNumberState extends State<GuessingNumber> {
               child: ElevatedButton(onPressed: _check, child: Text('Guess')),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.only(left: 140.0),
+              child: Center(
+                child: Row(
+                  children: [
+                    const Text('Your attemps:'),
+                    Text(count.toString()),
+                  ],
+                ),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(15.0),
               child: Text('Your score'),
             ),
             Center(
@@ -152,6 +163,9 @@ class _GuessingNumberState extends State<GuessingNumber> {
                   )
                 ],
               ),
+            ),
+            Flexible(
+              child: AnswerList(_answers),
             )
           ],
         ),
