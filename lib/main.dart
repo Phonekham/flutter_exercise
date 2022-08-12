@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_exercise/features/guessing_number/screen/guessing_number.dart';
+import 'package:flutter_exercise/features/guessing_number/widgets/guess_number.dart';
+import 'package:flutter_exercise/features/guessing_number/widgets/hangman.dart';
+import 'package:flutter_exercise/features/guessing_number/widgets/max.dart';
 import 'package:flutter_exercise/features/guessing_number/widgets/toic_tac_toe.dart';
 
 void main() {
@@ -17,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const TicTacToe(),
+      home: const Hangman(),
     );
   }
 }

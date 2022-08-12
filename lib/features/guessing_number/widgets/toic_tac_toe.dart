@@ -9,20 +9,16 @@ class TicTacToe extends StatefulWidget {
 
 class _TicTacToeState extends State<TicTacToe> {
   final _numberController = TextEditingController();
-  late int number = 0;
-  void _print() {
-    // for (var i = 0; i < _numberController.text; i++) {}
-  }
 
   void _check() {
     print('| | | |');
-    print(_numberController.text);
+    final int num = int.parse(_numberController.text);
+    for (var i = 0; i < 5; i++) {
+      print('|');
+    }
   }
 
   void _handleChange(value) {
-    // setState(() {
-    //   number = value;
-    // });
     print(value);
   }
 
