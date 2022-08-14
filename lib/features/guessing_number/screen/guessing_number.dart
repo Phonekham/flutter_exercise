@@ -3,6 +3,7 @@ import 'dart:math' show Random;
 
 import 'package:flutter_exercise/features/guessing_number/model/answer.dart';
 import 'package:flutter_exercise/features/guessing_number/widgets/answer_list.dart';
+import 'package:flutter_exercise/features/widgets/drawer.dart';
 
 class GuessingNumber extends StatefulWidget {
   const GuessingNumber({Key? key}) : super(key: key);
@@ -116,6 +117,7 @@ class _GuessingNumberState extends State<GuessingNumber> {
       appBar: AppBar(
         title: Text('Guessing Number App'),
       ),
+      drawer: CustomDrawer(),
       body: SafeArea(
         child: Column(
           children: [

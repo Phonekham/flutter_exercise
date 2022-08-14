@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math' show Random;
 
+import 'package:flutter_exercise/features/widgets/drawer.dart';
+
 class GuessNumber extends StatefulWidget {
   const GuessNumber({Key? key}) : super(key: key);
 
@@ -57,6 +59,7 @@ class _GuessNumberState extends State<GuessNumber> {
       appBar: AppBar(
         title: const Text('Guessing Number App'),
       ),
+      drawer: CustomDrawer(),
       body: SafeArea(
         child: Column(
           children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_exercise/features/widgets/drawer.dart';
 
 class MaxInput extends StatefulWidget {
   const MaxInput({Key? key}) : super(key: key);
@@ -47,6 +48,7 @@ class _MaxInputState extends State<MaxInput> {
       appBar: AppBar(
         title: const Text('Guessing Number App'),
       ),
+      drawer: CustomDrawer(),
       body: SafeArea(
         child: Column(
           children: [
