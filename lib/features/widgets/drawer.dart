@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_exercise/features/guess_number/guess_number.dart';
 import 'package:flutter_exercise/features/guessing_number/screen/guessing_number.dart';
+import 'package:flutter_exercise/features/hangman/hangman_word.dart';
 import 'package:flutter_exercise/features/hangman/screen/hangman.dart';
+import 'package:flutter_exercise/features/hangman/screen/hangman2.dart';
 import 'package:flutter_exercise/features/max/max.dart';
 
-class CustomDrawer extends StatelessWidget {
+class CustomDrawer extends StatefulWidget {
+  final HangmanWords hangmanWords = HangmanWords();
+
+  @override
+  State<CustomDrawer> createState() => _CustomDrawerState();
+}
+
+class _CustomDrawerState extends State<CustomDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -77,8 +86,11 @@ class CustomDrawer extends StatelessWidget {
           ListTile(
             title: const Text('Ex 25 hangman 2'),
             onTap: () {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (_) => const GuessingNumber()));
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          Hangman2(hangmanObject: widget.hangmanWords)));
             },
           ),
           ListTile(
